@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@use './config-scss/variables.scss';
+@import './config-scss/reset.scss';
+
+html {
+	font-family: 'Roboto', sans-serif;
+	background-image: url("./assets/images/background-img");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
+	height: 100%;
+}
+
+main {
+	box-sizing: border-box;
+	padding: 0 20px;
+	margin: 0 auto;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,115 @@
+<div class="ocorrencia-form-modal">
+  <div class="header">
+    <h2>Filme</h2>
+    <button mat-button type="button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form [formGroup]="_form" *ngIf="_form">
+    <div class="content">
+      <mat-form-field appearance="outline">
+        <mat-label>Duração</mat-label>
+        <input
+          type="time"
+          matInput
+          formControlName="duration"
+          required
+        />
+
+        <mat-error
+          *ngIf="
+            _form.controls['duration'].hasError('required') &&
+            _form.controls['duration'].touched
+          "
+        >
+          Campo <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Ano de lançamento</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="year"
+          required
+        />
+
+        <mat-error
+          *ngIf="
+            _form.controls['year'].hasError('required') &&
+            _form.controls['year'].touched
+          "
+        >
+          Campo <strong>obrigatório</strong>
+        </mat-error>
+
+        <mat-error
+          *ngIf="
+            _form.controls['year'].hasError('max') &&
+            _form.controls['year'].touched
+          "
+        >
+          O ano não pode ser maior que o atual
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Gênero</mat-label>
+        <mat-select formControlName="type">
+          <mat-option
+            *ngFor="let typeMovie of typeMovieOptions"
+            [value]="typeMovie.value"
+            >{{ typeMovie.label }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Plataforma de streaming</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="streaming"
+          placeholder="Título do filme"
+          required
+        />
+
+        <mat-error
+          *ngIf="
+            _form.controls['streaming'].hasError('required') &&
+            _form.controls['streaming'].touched
+          "
+        >
+          Campo <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Título</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="title"
+          placeholder="Título do filme"
+          required
+        />
+
+        <mat-error
+          *ngIf="
+            _form.controls['title'].hasError('required') &&
+            _form.controls['title'].touched
+          "
+        >
+          Campo <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="buttons" mat-dialog-actions>
+      <button mat-raised-button cdkFocusInitial (click)="onAddMovie()">
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>

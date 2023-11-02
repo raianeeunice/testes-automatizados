@@ -1,0 +1,45 @@
+.ocorrencia-form-modal {
+  width: 500px;
+  .header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #58909d;
+    }
+  }
+
+  .content {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      >* {
+        flex: 1;
+      }
+
+    
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+
+    button {
+      height: 50px;
+      width: 120px;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 19px;
+      color: white;
+      background-color: #58909d;
+    }
+  }
+}

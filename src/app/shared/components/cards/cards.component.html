@@ -1,0 +1,19 @@
+<ng-template [ngIf]="movie">
+  <mat-card class="{{ movie.type }}">
+    <section class="infos">
+      <div class="header">
+        <h2 class="title">{{ movie.title }}</h2>
+        <span class="year">{{ movie.year }}</span>
+      </div>
+
+      <div class="body">
+        <p>{{ movie.streaming }}</p>
+        <span class="duration">{{ movie.duration }}</span>
+      </div>
+    </section>
+
+    <section class="image">
+      <!-- <img src="../../../../assets/filmes/{{movie.type}}.png" alt="" /> -->
+    </section>
+  </mat-card>
+</ng-template>

@@ -1,0 +1,89 @@
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MoviesList } from 'src/app/core/interfaces/movies-list.interface';
+import { SelectOption } from 'src/app/core/interfaces/selection-options.interface';
+
+@Component({
+  selector: 'app-movies-add-list',
+  templateUrl: './movies-add-list.component.html',
+  styleUrls: ['./movies-add-list.component.scss'],
+})
+export class MoviesAddListComponent implements OnInit {
+  _form: FormGroup;
+  year: number = new Date().getFullYear();
+  typeMovieOptions: SelectOption[] = [
+    { label: 'Ação', value: 0 },
+    { label: 'Aventura', value: 1 },
+    { label: 'Comedia', value: 2 },
+    { label: 'Drama', value: 3 },
+    { label: 'Fantasia', value: 4 },
+    { label: 'Romance', value: 5 },
+    { label: 'Terror', value: 6 },
+  ];
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: MoviesList,
+    private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<MoviesAddListComponent>
+  ) {   
+    this._form = this.formBuilder.group({
+      duration: this.formBuilder.control(null, Validators.required),
+      title: this.formBuilder.control(null, Validators.required),
+      type: this.formBuilder.control(null, Validators.required),
+      year: this.formBuilder.control(null, [Validators.required, Validators.max(this.year)]),
+      streaming: this.formBuilder.control(null, Validators.required),
+    });
+  }
+
+  ngOnInit(): void {
+    const { data } = this;
+
+    if (!!data) {
+      this.changeFields(data);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this._form.reset();
+  }
+
+  close(): void {
+    this.dialogRef.close();
+  }
+
+  clear() {
+    this._form.reset();
+    this.dialogRef.close('limpar');
+  }
+
+  onAddMovie() {
+    if (this._form.invalid) {
+      this.highlightInvalidFields(this._form);
+      return;
+    }
+
+    const movie = this._form.getRawValue();
+    this.dialogRef.close(movie);
+  }
+
+  private changeFields(data: MoviesList) {
+    this._form.patchValue(data);
+  }
+
+  private highlightInvalidFields(form: FormGroup) {
+    const invalidControls = Object.keys(form.controls).filter(
+      (controlName) => form.get(controlName)?.invalid
+    );
+
+    if (invalidControls.length > 0) {
+      invalidControls.forEach((controlName) => {
+        form.get(controlName)?.markAsTouched();
+        form.get(controlName)?.markAsDirty();
+        form.get(controlName)?.updateValueAndValidity();
+      });
+    }
+  }
+
+ 
+}

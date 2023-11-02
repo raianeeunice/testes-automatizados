@@ -1,0 +1,6 @@
+<form>
+    <input type="text" #input (keyup)="search(input.value)" placeholder="Buscar Filme...">
+    <mat-icon>search</mat-icon>
+</form>
+
+<button mat-raised-button color="primary" (click)="emitAddMovie.emit()">Novo filme</button>
