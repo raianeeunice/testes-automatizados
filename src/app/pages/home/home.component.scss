@@ -1,6 +1,6 @@
 :host {
   .app-search {
-    max-width: 37rem;
+    max-width: 50rem;
     margin: 16px auto 2rem;
   }
 
@@ -9,6 +9,6 @@
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    max-width: 56rem;
+    max-width: 60rem;
   }
 }

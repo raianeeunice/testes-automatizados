@@ -93,6 +93,8 @@
           matInput
           formControlName="title"
           placeholder="Título do filme"
+          minlength="2"
+          maxlength="60"
           required
         />
 
@@ -103,6 +105,15 @@
           "
         >
           Campo <strong>obrigatório</strong>
+        </mat-error>
+
+        <mat-error
+          *ngIf="
+            _form.controls['title'].hasError('minlength') &&
+            _form.controls['title'].touched
+          "
+        >
+          Campo com no mínimo <strong>2</strong> caracteres
         </mat-error>
       </mat-form-field>
     </div>

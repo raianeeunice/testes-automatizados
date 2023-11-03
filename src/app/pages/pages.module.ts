@@ -8,6 +8,12 @@ import { MoviesAddListModule } from '../shared/components/movies-add-list/movies
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [CommonModule, PagesRoutingModule, MoviesSearchModule, CardsModule, MoviesAddListModule],
+  imports: [
+    CommonModule,
+    PagesRoutingModule,
+    MoviesSearchModule,
+    CardsModule,
+    MoviesAddListModule,
+  ],
 })
 export class PagesModule {}

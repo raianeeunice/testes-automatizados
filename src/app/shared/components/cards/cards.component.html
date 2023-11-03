@@ -1,19 +1,29 @@
 <ng-template [ngIf]="movie">
   <mat-card class="{{ movie.type }}">
     <section class="infos">
-      <div class="header">
+      <div class="content">
         <h2 class="title">{{ movie.title }}</h2>
-        <span class="year">{{ movie.year }}</span>
+
+        <div class="body">
+          <span><strong>Plataforma:</strong> {{ movie.streaming }}</span>
+          <span><strong>Duração:</strong> {{ movie.duration }}h</span>
+          <span><strong>Ano de lançamento:</strong> {{ movie.year }}</span>
+        </div>
       </div>
 
-      <div class="body">
-        <p>{{ movie.streaming }}</p>
-        <span class="duration">{{ movie.duration }}</span>
+      <div class="image">
+        <img src="../../../../assets/filmes/{{ movie.type }}.png" alt="" />
       </div>
     </section>
 
-    <section class="image">
-      <!-- <img src="../../../../assets/filmes/{{movie.type}}.png" alt="" /> -->
+    <section class="actions">
+      <button mat-stroked-button (click)="emitDeleteMovie.emit()">
+        <mat-icon class="material-icons-outlined delete">delete</mat-icon>
+      </button>
+
+      <button mat-stroked-button (click)="emitEditMovie.emit()">
+        <mat-icon class="material-icons-outlined edit">edit</mat-icon>
+      </button>
     </section>
   </mat-card>
 </ng-template>

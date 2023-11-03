@@ -13,13 +13,13 @@ export class MoviesAddListComponent implements OnInit {
   _form: FormGroup;
   year: number = new Date().getFullYear();
   typeMovieOptions: SelectOption[] = [
-    { label: 'Ação', value: 0 },
-    { label: 'Aventura', value: 1 },
-    { label: 'Comedia', value: 2 },
-    { label: 'Drama', value: 3 },
-    { label: 'Fantasia', value: 4 },
-    { label: 'Romance', value: 5 },
-    { label: 'Terror', value: 6 },
+    { label: 'Ação', value: "acao" },
+    { label: 'Aventura', value: "aventura" },
+    { label: 'Comedia', value: "comedia" },
+    { label: 'Drama', value:  "drama" },
+    { label: 'Fantasia', value: "fantasia" },
+    { label: 'Romance', value: "romance" },
+    { label: 'Terror', value:   "terror" },
   ];
 
   constructor(
@@ -29,9 +29,9 @@ export class MoviesAddListComponent implements OnInit {
   ) {   
     this._form = this.formBuilder.group({
       duration: this.formBuilder.control(null, Validators.required),
-      title: this.formBuilder.control(null, Validators.required),
+      title: this.formBuilder.control(null, [Validators.required, Validators.minLength(2), Validators.maxLength(60)]),
       type: this.formBuilder.control(null, Validators.required),
-      year: this.formBuilder.control(null, [Validators.required, Validators.max(this.year)]),
+      year: this.formBuilder.control(null, [Validators.required, Validators.min(1900), Validators.max(this.year)]),
       streaming: this.formBuilder.control(null, Validators.required),
     });
   }

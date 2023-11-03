@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MoviesList } from 'src/app/core/interfaces/movies-list.interface';
 import { MoviesAddListComponent } from 'src/app/shared/components/movies-add-list/movies-add-list.component';
@@ -8,11 +8,10 @@ import { MoviesAddListComponent } from 'src/app/shared/components/movies-add-lis
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, DoCheck {
-  movie: MoviesList | null = null;
+export class HomeComponent implements DoCheck, OnDestroy {
   constructor(private dialog: MatDialog) {}
 
-  public taskList: Array<MoviesList> = JSON.parse(
+  public moviesList: Array<MoviesList> = JSON.parse(
     localStorage.getItem('list') || '[]'
   );
 
@@ -20,52 +19,55 @@ export class HomeComponent implements OnInit, DoCheck {
     this.setLocalStorage();
   }
 
-  ngOnInit(): void {}
+  ngOnDestroy(): void {
+    localStorage.clear();
+  }
 
-  openAddMovieModal() {
+  openAddMovieModal(edit: boolean, index?: number, movieEvent?: MoviesList) {
+    let movie = null;
+
+    if (movieEvent) {
+      movie = movieEvent;
+    }
     const dialogRef = this.dialog.open(MoviesAddListComponent, {
-      data: this.movie,
+      data: movie,
       minWidth: 500,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.movie = result;
-        return;
+        if (!edit) {
+          this.setMovieList(result);
+          return;
+        }
+
+        if (index !== undefined && index >= 0) {
+          this.editMovieList(result, index);
+        }
       }
     });
   }
 
-  public setEmitTaskList(event: MoviesList) {
-    return this.taskList.push(event);
+  private editMovieList(event: MoviesList, index: number) {
+    console.log(event);
+    this.moviesList[index] = event;
   }
 
-  public deleteItemTaskList(event: number) {
-    return this.taskList.splice(event, 1);
+  public setMovieList(movie: MoviesList) {
+    this.moviesList.unshift(movie);
   }
 
-  public deleteAllTaskList() {
-    const confirm = window.confirm('Tem certeza que deseja Deletar tudo?');
-
-    if (confirm) {
-      this.taskList = [];
-    }
+  public deleteMovieList(event: number) {
+    this.moviesList.splice(event, 1);
   }
 
-  public validationInput(event: string, index: number) {
-    if (!event.length) {
-      const confirm = window.confirm('Task está vazia, deseja deletar?');
-
-      if (confirm) {
-        this.deleteItemTaskList(index);
-      }
-    }
+  public deleteAllMovieList() {
+    this.moviesList = [];
   }
 
   public setLocalStorage() {
-    if (this.taskList) {
-      //this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked));
-      localStorage.setItem('list', JSON.stringify(this.taskList));
+    if (this.moviesList) {
+      localStorage.setItem('list', JSON.stringify(this.moviesList));
     }
   }
 }

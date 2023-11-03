@@ -1,8 +1,6 @@
 :host {
   mat-card {
-    display: flex;
     background-color: var(--branco);
-    align-items: center;
     border-left: 4px solid;
     border-radius: 18px;
 
@@ -36,36 +34,55 @@
 
     .infos {
       display: flex;
-      flex-direction: column;
-      color: var(--secondary-color);
-      width: 100%;
+      align-items: center;
 
-      .header {
+      .content {
+        display: flex;
+        flex-direction: column;
+        color: var(--secondary-color);
+        width: 100%;
+
         .title {
           font-size: 1.375rem;
           font-weight: 700;
-          text-transform: capitalize;
         }
 
-        .year {
-          font-size: 0.8rem;
+        .body {
+          display: flex;
+          flex-direction: column;
+          margin-top: 1rem;
+          font-size: 1rem;
+          gap: 8px;
+
+          strong {
+            color: #5c646e;
+          }
         }
       }
 
-      .body {
-        display: flex;
-        flex-direction: column;
-        margin-top: 2rem;
-        font-size: 1rem;
+      .image {
+        width: 6rem;
+        height: 5rem;
+
+        img {
+          width: 100%;
+        }
       }
     }
 
-    .image {
-      width: 6rem;
-      height: 5rem;
+    .actions {
+      width: 100%;
+      margin-top: 1rem;
+      display: flex;
+      gap: 20px;
+      justify-content: flex-end;
 
-      img {
-        width: 100%;
+      .delete {
+        color: #ff5757;
+      }
+
+      .edit {
+        color: #004aad;
       }
     }
   }

@@ -1,7 +1,18 @@
 <section class="app-search">
-  <app-movies-search (emitAddMovie)="openAddMovieModal()"></app-movies-search>
+  <app-movies-search
+    (emitAddMovie)="openAddMovieModal(false)"
+    (emitDeleteAllMovie)="deleteAllMovieList()"
+  ></app-movies-search>
 </section>
 
-<section class="cards">
-
-</section>
+<ng-template [ngIf]="moviesList.length > 0">
+  <section class="cards">
+    <ng-container *ngFor="let movie of moviesList; let i = index">
+      <app-cards
+        [movie]="movie"
+        (emitDeleteMovie)="deleteMovieList(i)"
+        (emitEditMovie)="openAddMovieModal(true, i, movie)"
+      ></app-cards>
+    </ng-container>
+  </section>
+</ng-template>

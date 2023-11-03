@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MoviesList } from 'src/app/core/interfaces/movies-list.interface';
 
 @Component({
@@ -8,6 +8,8 @@ import { MoviesList } from 'src/app/core/interfaces/movies-list.interface';
 })
 export class CardsComponent implements OnInit {
   @Input() movie: MoviesList | null = null;
+  @Output() public emitDeleteMovie: EventEmitter<void> = new EventEmitter();
+  @Output() public emitEditMovie: EventEmitter<void> = new EventEmitter();
 
   constructor() {}
 

@@ -8,7 +8,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class MoviesSearchComponent implements OnInit {
 
   @Output() public emitSearch: EventEmitter<string> = new EventEmitter();
-  @Output() public emitAddMovie: EventEmitter<string> = new EventEmitter();
+  @Output() public emitAddMovie: EventEmitter<void> = new EventEmitter();
+  @Output() public emitDeleteAllMovie: EventEmitter<void> = new EventEmitter();
+  
   constructor() { }
 
   ngOnInit(): void {
