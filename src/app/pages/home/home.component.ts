@@ -1,7 +1,7 @@
 import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MoviesList } from 'src/app/core/interfaces/movies-list.interface';
 import { MoviesAddListComponent } from 'src/app/shared/components/movies-add-list/movies-add-list.component';
+import { MoviesList } from 'src/app/core/interfaces/movies-list.interface';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +11,10 @@ import { MoviesAddListComponent } from 'src/app/shared/components/movies-add-lis
 export class HomeComponent implements DoCheck, OnDestroy {
   constructor(private dialog: MatDialog) {}
 
-  public moviesList: Array<MoviesList> = JSON.parse(
+  private setMoviesList: Array<MoviesList> = JSON.parse(
     localStorage.getItem('list') || '[]'
   );
+  public getAllMovies = this.setMoviesList;
 
   ngDoCheck() {
     this.setLocalStorage();
@@ -23,7 +24,43 @@ export class HomeComponent implements DoCheck, OnDestroy {
     localStorage.clear();
   }
 
-  openAddMovieModal(edit: boolean, index?: number, movieEvent?: MoviesList) {
+  private addMovieList(movie: MoviesList): void {
+    this.getAllMovies.unshift(movie);
+  }
+
+  private editMovieList(event: MoviesList, index: number): void {
+    console.log(event);
+    this.getAllMovies[index] = event;
+  }
+
+  public deleteAllMovieList() {
+    this.getAllMovies = [];
+  }
+
+  public deleteMovieList(event: number) {
+    this.getAllMovies.splice(event, 1);
+  }
+
+  public getSearch(value: string) {
+    const filter = this.setMoviesList.filter((res: MoviesList) => {
+      const title = res.title.toLocaleLowerCase();
+      return title.includes(value.toLowerCase());
+    });
+
+    this.getAllMovies = filter;
+  }
+
+  public setLocalStorage() {
+    if (this.setMoviesList) {
+      localStorage.setItem('list', JSON.stringify(this.setMoviesList));
+    }
+  }
+
+  public openAddMovieModal(
+    edit: boolean,
+    index?: number,
+    movieEvent?: MoviesList
+  ): void {
     let movie = null;
 
     if (movieEvent) {
@@ -37,7 +74,7 @@ export class HomeComponent implements DoCheck, OnDestroy {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (!edit) {
-          this.setMovieList(result);
+          this.addMovieList(result);
           return;
         }
 
@@ -46,38 +83,5 @@ export class HomeComponent implements DoCheck, OnDestroy {
         }
       }
     });
-  }
-
-  private editMovieList(event: MoviesList, index: number) {
-    console.log(event);
-    this.moviesList[index] = event;
-  }
-
-  public setMovieList(movie: MoviesList) {
-    this.moviesList.unshift(movie);
-  }
-
-  public deleteMovieList(event: number) {
-    this.moviesList.splice(event, 1);
-  }
-
-  public deleteAllMovieList() {
-    this.moviesList = [];
-  }
-
-  public setLocalStorage() {
-    if (this.moviesList) {
-      localStorage.setItem('list', JSON.stringify(this.moviesList));
-    }
-  }
-
-  public getSearch(value: string) {
-    const filter = this.moviesList.filter((res: MoviesList) => {
-      const title = res.title.toLocaleLowerCase();
-      console.log('title ', title, value)
-      return title.includes(value.toLowerCase());
-    });
-
-    this.moviesList = filter;
   }
 }

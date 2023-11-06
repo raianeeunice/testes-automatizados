@@ -6,9 +6,9 @@
   ></app-movies-search>
 </section>
 
-<ng-template [ngIf]="moviesList.length > 0">
+<ng-template [ngIf]="getAllMovies.length > 0">
   <section class="cards">
-    <ng-container *ngFor="let movie of moviesList; let i = index">
+    <ng-container *ngFor="let movie of getAllMovies; let i = index">
       <app-cards
         [movie]="movie"
         (emitDeleteMovie)="deleteMovieList(i)"
