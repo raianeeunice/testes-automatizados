@@ -1,5 +1,6 @@
 <section class="app-search">
   <app-movies-search
+    (emitSearch)="getSearch($event)"
     (emitAddMovie)="openAddMovieModal(false)"
     (emitDeleteAllMovie)="deleteAllMovieList()"
   ></app-movies-search>

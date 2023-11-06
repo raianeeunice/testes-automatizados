@@ -70,4 +70,14 @@ export class HomeComponent implements DoCheck, OnDestroy {
       localStorage.setItem('list', JSON.stringify(this.moviesList));
     }
   }
+
+  public getSearch(value: string) {
+    const filter = this.moviesList.filter((res: MoviesList) => {
+      const title = res.title.toLocaleLowerCase();
+      console.log('title ', title, value)
+      return title.includes(value.toLowerCase());
+    });
+
+    this.moviesList = filter;
+  }
 }
