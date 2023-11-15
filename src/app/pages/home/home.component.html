@@ -7,9 +7,10 @@
 </section>
 
 <ng-template [ngIf]="movieList.length > 0">
-  <section class="cards">
+  <section data-testid="card-list" class="cards">
     <ng-container *ngFor="let movie of movieList; let i = index">
       <app-cards
+        data-testid="card-movie"
         [movie]="movie"
         (emitDeleteMovie)="deleteMovieList(i)"
         (emitEditMovie)="openAddMovieModal(true, i, movie)"
