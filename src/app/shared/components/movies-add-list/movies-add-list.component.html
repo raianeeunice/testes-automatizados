@@ -1,7 +1,12 @@
 <div class="ocorrencia-form-modal">
   <div class="header">
     <h2>Filme</h2>
-    <button mat-button type="button" (click)="close()">
+    <button
+      data-testid="close-button"
+      mat-button
+      type="button"
+      (click)="close()"
+    >
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -11,6 +16,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Duração</mat-label>
         <input
+          data-testid="input-duration"
           type="time"
           matInput
           formControlName="duration"
@@ -30,6 +36,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Ano de lançamento</mat-label>
         <input
+          data-testid="input-year"
           type="number"
           matInput
           formControlName="year"
@@ -61,6 +68,7 @@
           <mat-option
             *ngFor="let typeMovie of typeMovieOptions"
             [value]="typeMovie.value"
+            data-testid="input-typeMovie"
             >{{ typeMovie.label }}</mat-option
           >
         </mat-select>
@@ -69,6 +77,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Plataforma de streaming</mat-label>
         <input
+          data-testid="input-streaming"
           type="text"
           matInput
           formControlName="streaming"
@@ -89,6 +98,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Título</mat-label>
         <input
+          data-testid="input-title"
           type="text"
           matInput
           formControlName="title"
@@ -118,7 +128,12 @@
       </mat-form-field>
     </div>
     <div class="buttons" mat-dialog-actions>
-      <button mat-raised-button cdkFocusInitial (click)="onAddMovie()">
+      <button
+        data-testid="save-button"
+        mat-raised-button
+        cdkFocusInitial
+        (click)="onAddMovie()"
+      >
         Salvar
       </button>
     </div>
