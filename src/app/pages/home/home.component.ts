@@ -11,10 +11,10 @@ import { MoviesList } from 'src/app/core/interfaces/movies-list.interface';
 export class HomeComponent implements DoCheck, OnDestroy {
   constructor(private dialog: MatDialog) {}
 
-  private setMoviesList: Array<MoviesList> = JSON.parse(
+  private initialMoviesList: Array<MoviesList> = JSON.parse(
     localStorage.getItem('list') || '[]'
   );
-  public getAllMovies = this.setMoviesList;
+  public movieList = this.initialMoviesList;
 
   ngDoCheck() {
     this.setLocalStorage();
@@ -25,34 +25,34 @@ export class HomeComponent implements DoCheck, OnDestroy {
   }
 
   private addMovieList(movie: MoviesList): void {
-    this.getAllMovies.unshift(movie);
+    this.movieList.unshift(movie);
   }
 
   private editMovieList(event: MoviesList, index: number): void {
     console.log(event);
-    this.getAllMovies[index] = event;
+    this.movieList[index] = event;
   }
 
   public deleteAllMovieList() {
-    this.getAllMovies = [];
+    this.movieList = [];
   }
 
   public deleteMovieList(event: number) {
-    this.getAllMovies.splice(event, 1);
+    this.movieList.splice(event, 1);
   }
 
   public getSearch(value: string) {
-    const filter = this.setMoviesList.filter((res: MoviesList) => {
-      const title = res.title.toLocaleLowerCase();
+    const filter = this.initialMoviesList.filter((res: MoviesList) => {
+      const title = res.title.toLowerCase();
       return title.includes(value.toLowerCase());
     });
 
-    this.getAllMovies = filter;
+    this.movieList = filter;
   }
 
   public setLocalStorage() {
-    if (this.setMoviesList) {
-      localStorage.setItem('list', JSON.stringify(this.setMoviesList));
+    if (this.initialMoviesList) {
+      localStorage.setItem('list', JSON.stringify(this.initialMoviesList));
     }
   }
 
