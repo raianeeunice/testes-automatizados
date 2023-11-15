@@ -13,7 +13,7 @@
 
   <form [formGroup]="_form" *ngIf="_form">
     <div class="content">
-      <mat-form-field appearance="outline">
+      <mat-form-field data-testid="field-duration" appearance="outline">
         <mat-label>Duração</mat-label>
         <input
           data-testid="input-duration"
@@ -33,7 +33,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field data-testid="field-year" appearance="outline">
         <mat-label>Ano de lançamento</mat-label>
         <input
           data-testid="input-year"
@@ -62,7 +62,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field data-testid="field-type" appearance="outline">
         <mat-label>Gênero</mat-label>
         <mat-select formControlName="type">
           <mat-option
@@ -74,7 +74,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field data-testid="field-stream" appearance="outline">
         <mat-label>Plataforma de streaming</mat-label>
         <input
           data-testid="input-streaming"
@@ -95,7 +95,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field data-testid="field-title" appearance="outline">
         <mat-label>Título</mat-label>
         <input
           data-testid="input-title"
