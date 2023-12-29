@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "qawolf:record": "qawolf record http://localhost:4200"
+    "qawolf:record": "qawolf record http://localhost:4200",
+    "qawolf": "qawolf"
   },
   "private": true,
   "dependencies": {
