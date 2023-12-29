@@ -113,6 +113,7 @@
             _form.controls['title'].hasError('required') &&
             _form.controls['title'].touched
           "
+          data-testid="error-required-title"
         >
           Campo <strong>obrigatório</strong>
         </mat-error>
@@ -122,8 +123,9 @@
             _form.controls['title'].hasError('minlength') &&
             _form.controls['title'].touched
           "
+          data-testid="error-min-title"
         >
-          Campo com no mínimo <strong>2</strong> caracteres
+        Campo com no mínimo <strong>2</strong> caracteres
         </mat-error>
       </mat-form-field>
     </div>
