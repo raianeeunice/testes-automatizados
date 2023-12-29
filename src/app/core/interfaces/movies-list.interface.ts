@@ -1,6 +1,6 @@
 import { MoviesType } from '../enums/movies-type.enum';
 
-export interface MoviesList {
+export interface MovieCard {
   duration: string;
   title: string;
   type: string;

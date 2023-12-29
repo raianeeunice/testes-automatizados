@@ -1,7 +1,7 @@
 import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MoviesAddListComponent } from 'src/app/shared/components/movies-add-list/movies-add-list.component';
-import { MoviesList } from 'src/app/core/interfaces/movies-list.interface';
+import { MovieCard } from 'src/app/core/interfaces/movies-list.interface';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import { MoviesList } from 'src/app/core/interfaces/movies-list.interface';
 export class HomeComponent implements DoCheck, OnDestroy {
   constructor(private dialog: MatDialog) {}
 
-  private initialMoviesList: Array<MoviesList> = JSON.parse(
+  private initialMoviesList: Array<MovieCard> = JSON.parse(
     localStorage.getItem('list') || '[]'
   );
   public movieList = this.initialMoviesList;
@@ -24,11 +24,11 @@ export class HomeComponent implements DoCheck, OnDestroy {
     localStorage.clear();
   }
 
-  private addMovieList(movie: MoviesList): void {
+  private addMovieList(movie: MovieCard): void {
     this.movieList.unshift(movie);
   }
 
-  private editMovieList(event: MoviesList, index: number): void {
+  private editMovieList(event: MovieCard, index: number): void {
     console.log(event);
     this.movieList[index] = event;
   }
@@ -42,7 +42,7 @@ export class HomeComponent implements DoCheck, OnDestroy {
   }
 
   public getSearch(value: string) {
-    const filter = this.initialMoviesList.filter((res: MoviesList) => {
+    const filter = this.initialMoviesList.filter((res: MovieCard) => {
       const title = res.title.toLowerCase();
       return title.includes(value.toLowerCase());
     });
@@ -59,7 +59,7 @@ export class HomeComponent implements DoCheck, OnDestroy {
   public openAddMovieModal(
     edit: boolean,
     index?: number,
-    movieEvent?: MoviesList
+    movieEvent?: MovieCard
   ): void {
     let movie = null;
 
