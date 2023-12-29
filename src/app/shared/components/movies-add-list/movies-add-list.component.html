@@ -74,7 +74,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field data-testid="field-stream" appearance="outline">
+      <mat-form-field data-testid="field-streaming" appearance="outline">
         <mat-label>Plataforma de streaming</mat-label>
         <input
           data-testid="input-streaming"
@@ -113,6 +113,7 @@
             _form.controls['title'].hasError('required') &&
             _form.controls['title'].touched
           "
+           data-testid="error-required-title"
         >
           Campo <strong>obrigatório</strong>
         </mat-error>
@@ -122,6 +123,7 @@
             _form.controls['title'].hasError('minlength') &&
             _form.controls['title'].touched
           "
+          data-testid="error-min-title"
         >
           Campo com no mínimo <strong>2</strong> caracteres
         </mat-error>
