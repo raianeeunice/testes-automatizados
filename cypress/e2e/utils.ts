@@ -14,7 +14,7 @@ export const createCards = (cards: MovieCard[]) => {
       .get('[data-testid="input-typeMovie"]')
       .contains(card.type)
       .click();
-    cy.get('[data-testid="field-stream"]').type(card.streaming);
+    cy.get('[data-testid="field-streaming"]').type(card.streaming);
     cy.get('[data-testid="field-title"]').type(card.title);
 
     cy.get('[data-testid="save-button"]').click();
