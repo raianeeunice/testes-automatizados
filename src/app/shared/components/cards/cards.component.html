@@ -5,9 +5,9 @@
         <h2 data-testid="card-title" class="title">{{ movie.title }}</h2>
 
         <div class="body">
-          <span><strong>Plataforma:</strong> {{ movie.streaming }}</span>
-          <span><strong>Duração:</strong> {{ movie.duration }}h</span>
-          <span><strong>Ano de lançamento:</strong> {{ movie.year }}</span>
+          <span data-testid="card-streaming"><strong>Plataforma:</strong> {{ movie.streaming }}</span>
+          <span data-testid="card-duration"><strong>Duração:</strong> {{ movie.duration }}h</span>
+          <span data-testid="card-year"><strong>Ano de lançamento:</strong> {{ movie.year }}</span>
         </div>
       </div>
 
@@ -17,7 +17,7 @@
     </section>
 
     <section class="actions">
-      <button data-testid="delete-button" mat-stroked-button (click)="emitDeleteMovie.emit()">
+      <button data-testid="delete-card" mat-stroked-button (click)="emitDeleteMovie.emit()">
         <mat-icon class="material-icons-outlined delete">delete</mat-icon>
       </button>
 
