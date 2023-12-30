@@ -15,29 +15,23 @@ afterAll(async () => {
   await browser.close();
 });
 
-test("should create a card", async () => {
+test("should error create a card movie", async () => {
   const page = await context.newPage();
   await page.goto("http://localhost:4200/", { waitUntil: "domcontentloaded" });
 
   const card = [
     {
-      year: "1972",
+      year: "1898",
       duration: "02:55",
       type: "Drama",
       streaming: "Netflix",
-      title: "The Godfather",
+      title: " ",
     },
   ];
 
   await createCards(card, page, qawolf);
 
-  await page.waitForSelector("[data-testid='card-movie']");
-
-  // verifica se o card foi criado com playwright
-  const cardMovieCount = await page.getByTestId("card-movie").count();
-  expect(cardMovieCount).toBe(1);
-
-  // verifica se o card tem o título correto com playwright
-  const cardTitle = await page.getByTestId("card-title").textContent();
-  expect(cardTitle).toBe("The Godfather");
+  // verifica se aparece a mensagem de erro
+  const errorMessage = await page.getByTestId("error-min-title").textContent();
+  expect(errorMessage).toContain("Campo com no mínimo 2 caracteres");
 });

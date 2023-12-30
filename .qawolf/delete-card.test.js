@@ -15,10 +15,10 @@ afterAll(async () => {
   await browser.close();
 });
 
-test("should create a card", async () => {
+test("delete-card", async () => {
   const page = await context.newPage();
   await page.goto("http://localhost:4200/", { waitUntil: "domcontentloaded" });
-
+  
   const card = [
     {
       year: "1972",
@@ -31,13 +31,12 @@ test("should create a card", async () => {
 
   await createCards(card, page, qawolf);
 
-  await page.waitForSelector("[data-testid='card-movie']");
+  await page.click('[data-testid="delete-card"]');
 
-  // verifica se o card foi criado com playwright
-  const cardMovieCount = await page.getByTestId("card-movie").count();
-  expect(cardMovieCount).toBe(1);
+  // verifica se a lista de cards está vazia
+  const elem = await page.getByTestId("card-list").count();
+  expect(elem).toBe(0);
 
-  // verifica se o card tem o título correto com playwright
-  const cardTitle = await page.getByTestId("card-title").textContent();
-  expect(cardTitle).toBe("The Godfather");
+  const elemTitle = await page.getByTestId("card-title").count();
+  expect(elem).toBe(0);
 });

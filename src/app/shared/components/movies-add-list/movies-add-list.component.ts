@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MoviesList } from 'src/app/core/interfaces/movies-list.interface';
+import { MovieCard } from 'src/app/core/interfaces/movies-list.interface';
 import { SelectOption } from 'src/app/core/interfaces/selection-options.interface';
 
 @Component({
@@ -23,7 +23,7 @@ export class MoviesAddListComponent implements OnInit {
   ];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: MoviesList,
+    @Inject(MAT_DIALOG_DATA) public data: MovieCard,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<MoviesAddListComponent>
   ) {
@@ -56,7 +56,7 @@ export class MoviesAddListComponent implements OnInit {
     this._form.reset();
   }
 
-  private changeFields(data: MoviesList) {
+  private changeFields(data: MovieCard) {
     this._form.patchValue(data);
   }
 

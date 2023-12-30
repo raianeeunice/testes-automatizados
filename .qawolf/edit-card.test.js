@@ -15,7 +15,7 @@ afterAll(async () => {
   await browser.close();
 });
 
-test("should create a card", async () => {
+test("should edit a card movie", async () => {
   const page = await context.newPage();
   await page.goto("http://localhost:4200/", { waitUntil: "domcontentloaded" });
 
@@ -31,13 +31,19 @@ test("should create a card", async () => {
 
   await createCards(card, page, qawolf);
 
-  await page.waitForSelector("[data-testid='card-movie']");
+  await page.click('[data-testid="edit-card"]');
+  await page.click('[data-testid="input-year"]');
+  await page.fill('[data-testid="input-year"]', "1974");
+  await page.click('[data-testid="field-title"] .mat-form-field-infix');
+  await page.fill('[data-testid="input-title"]', "The Godfather: Part II");
+  await page.click('[data-testid="save-button"]');
+  await page.click('[data-testid="card-movie"] .body');
 
-  // verifica se o card foi criado com playwright
-  const cardMovieCount = await page.getByTestId("card-movie").count();
-  expect(cardMovieCount).toBe(1);
+  await page.waitForSelector('[data-testid="card-movie"]');
 
-  // verifica se o card tem o título correto com playwright
   const cardTitle = await page.getByTestId("card-title").textContent();
-  expect(cardTitle).toBe("The Godfather");
+  expect(cardTitle).toEqual("The Godfather: Part II");
+
+  const cardYear = await page.getByTestId("card-year").textContent();
+  expect(cardYear).toEqual("Ano de lançamento: 1974");
 });
