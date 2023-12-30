@@ -40,6 +40,9 @@ describe('edit card movie', () => {
 
     // verifica se o título foi alterado
     cy.get('[data-testid="card-title"]').should('have.text', 'The Godfather: Part II');
+
+    // verifica se o ano foi alterado
+    cy.get('[data-testid="card-year"]').should('have.text', 'Ano de lançamento: 1974');
     
   });
 });
