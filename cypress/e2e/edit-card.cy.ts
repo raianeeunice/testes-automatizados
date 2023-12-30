@@ -22,7 +22,7 @@ describe('edit card movie', () => {
     cy.get('[data-testid="card-title"]').should('have.text', 'The Godfather');
 
     // clica no botão de editar
-    cy.get('[data-testid="edit-button"]').click();
+    cy.get('[data-testid="edit-card"]').click();
 
     // espera 1 segundo para que o modal seja aberto
     cy.wait(1000);
