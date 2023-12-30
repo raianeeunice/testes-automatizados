@@ -16,6 +16,9 @@ test("should delete all cards", async () => {
   const page = await context.newPage();
   await page.goto("http://localhost:4200/", { waitUntil: "domcontentloaded" });
 
+  const initialCardMovieCard = await page.getByTestId("card-movie").count();
+  expect(initialCardMovieCard).toBe(0);
+
   const card = [
     {
       year: "1972",

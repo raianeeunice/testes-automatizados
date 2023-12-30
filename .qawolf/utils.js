@@ -18,10 +18,4 @@ async function createCards(cards, page, qawolf) {
   }
 }
 
-// TODO
-
-// fazer listar varios cars, deletar varios cards, testar um com erro
-// descobrir como rodar só no terminal
-// anotar o que foi feito
-
 module.exports = { createCards };

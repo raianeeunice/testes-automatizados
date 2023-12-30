@@ -19,6 +19,9 @@ test("should edit a card movie", async () => {
   const page = await context.newPage();
   await page.goto("http://localhost:4200/", { waitUntil: "domcontentloaded" });
 
+  const initialCardMovieCard = await page.getByTestId("card-movie").count();
+  expect(initialCardMovieCard).toBe(0);
+
   const card = [
     {
       year: "1972",
@@ -39,10 +42,13 @@ test("should edit a card movie", async () => {
   await page.click('[data-testid="save-button"]');
   await page.click('[data-testid="card-movie"] .body');
 
+  const cardTitle = await page.getByTestId("card-title").textContent();
+  expect(cardTitle).toBe("The Godfather");
+
   await page.waitForSelector('[data-testid="card-movie"]');
 
-  const cardTitle = await page.getByTestId("card-title").textContent();
-  expect(cardTitle).toEqual("The Godfather: Part II");
+  const cardTitleEdited = await page.getByTestId("card-title").textContent();
+  expect(cardTitleEdited).toEqual("The Godfather: Part II");
 
   const cardYear = await page.getByTestId("card-year").textContent();
   expect(cardYear).toEqual("Ano de lançamento: 1974");
