@@ -1,0 +1,109 @@
+{
+  "startTime": "2023-12-30T00:46:07.828Z",
+  "endTime": "2023-12-30T00:46:50.897Z",
+  "userAgents": [
+    "Chrome 120.0.6099.110 / Windows 10"
+  ],
+  "passed": 6,
+  "total": 6,
+  "skipped": 0,
+  "fixtures": [
+    {
+      "name": "create-card",
+      "path": "C:\\Users\\JARVIS\\tcc-2\\movies-project\\testcafe\\create-card.e2e-spec.ts",
+      "meta": {},
+      "tests": [
+        {
+          "name": "should create a card movie",
+          "meta": {},
+          "errs": [],
+          "durationMs": 4041,
+          "unstable": false,
+          "screenshotPath": null,
+          "skipped": false
+        }
+      ]
+    },
+    {
+      "name": "delete-all",
+      "path": "C:\\Users\\JARVIS\\tcc-2\\movies-project\\testcafe\\delete-all.e2e-spec.ts",
+      "meta": {},
+      "tests": [
+        {
+          "name": "should delete all the cards",
+          "meta": {},
+          "errs": [],
+          "durationMs": 13835,
+          "unstable": false,
+          "screenshotPath": null,
+          "skipped": false
+        }
+      ]
+    },
+    {
+      "name": "delete-card",
+      "path": "C:\\Users\\JARVIS\\tcc-2\\movies-project\\testcafe\\delete-card.e2e-spec.ts",
+      "meta": {},
+      "tests": [
+        {
+          "name": "should delete a card movie",
+          "meta": {},
+          "errs": [],
+          "durationMs": 3256,
+          "unstable": false,
+          "screenshotPath": null,
+          "skipped": false
+        }
+      ]
+    },
+    {
+      "name": "edit-card",
+      "path": "C:\\Users\\JARVIS\\tcc-2\\movies-project\\testcafe\\edit-card.e2e-spec.ts",
+      "meta": {},
+      "tests": [
+        {
+          "name": "should edit a card movie",
+          "meta": {},
+          "errs": [],
+          "durationMs": 5318,
+          "unstable": false,
+          "screenshotPath": null,
+          "skipped": false
+        }
+      ]
+    },
+    {
+      "name": "error-card",
+      "path": "C:\\Users\\JARVIS\\tcc-2\\movies-project\\testcafe\\error-card.e2e-spec.ts",
+      "meta": {},
+      "tests": [
+        {
+          "name": "should error create a card movie",
+          "meta": {},
+          "errs": [],
+          "durationMs": 2582,
+          "unstable": false,
+          "screenshotPath": null,
+          "skipped": false
+        }
+      ]
+    },
+    {
+      "name": "list-card",
+      "path": "C:\\Users\\JARVIS\\tcc-2\\movies-project\\testcafe\\list-card.e2e-spec.ts",
+      "meta": {},
+      "tests": [
+        {
+          "name": "should list all the cards",
+          "meta": {},
+          "errs": [],
+          "durationMs": 13499,
+          "unstable": false,
+          "screenshotPath": null,
+          "skipped": false
+        }
+      ]
+    }
+  ],
+  "warnings": []
+}

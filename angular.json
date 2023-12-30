@@ -101,7 +101,7 @@
           "builder": "angular-testcafe:testcafe",
           "options": {
             "devServerTarget": "movies-project:serve",
-            "browsers": ["chrome"],
+            "browsers": ["chrome:headless"],
             "src": "testcafe/*.e2e-spec.ts",
             "reporters": [
               {
