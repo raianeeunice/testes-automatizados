@@ -34,6 +34,9 @@ test("should edit a card movie", async () => {
 
   await createCards(card, page, qawolf);
 
+  const cardTitle = await page.getByTestId("card-title").textContent();
+  expect(cardTitle).toBe("The Godfather");
+
   await page.click('[data-testid="edit-card"]');
   await page.click('[data-testid="input-year"]');
   await page.fill('[data-testid="input-year"]', "1974");
@@ -41,9 +44,6 @@ test("should edit a card movie", async () => {
   await page.fill('[data-testid="input-title"]', "The Godfather: Part II");
   await page.click('[data-testid="save-button"]');
   await page.click('[data-testid="card-movie"] .body');
-
-  const cardTitle = await page.getByTestId("card-title").textContent();
-  expect(cardTitle).toBe("The Godfather");
 
   await page.waitForSelector('[data-testid="card-movie"]');
 
