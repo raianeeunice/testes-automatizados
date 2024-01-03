@@ -65,11 +65,19 @@ def create_time_stamp_plot(sample_milliseconds, cpu_percentages, memory_bytes, l
 
 def generate_measures_csv(labels, measures):
     csv_file = open('result_cmdbench.csv', 'w')
-    csv_content = 'name,cpu_total_times,memory_max_values,memory_max_per_process_values,execution_time\n'
+    csv_content = 'name,cpu_total_times,memory_max_values,memory_max_per_process_values,execution_time,cpu_percentages,disk_write_bytes,disk_read_bytes,memory_usage\n'
     for i, label in enumerate(labels):
         # statistics
         cpu_total_times_mean = np.mean(measures['cpu_total_times'][i])
         cpu_total_times_std = np.std(measures['cpu_total_times'][i])
+        cpu_percentages_mean = np.mean(measures['cpu_percentages'][i])
+        cpu_percentages_std = np.std(measures['cpu_percentages'][i])
+        disk_write_bytes_mean = np.mean(measures['disk_write_bytes'][i])
+        disk_write_bytes_std = np.std(measures['disk_write_bytes'][i])
+        disk_read_bytes_mean = np.mean(measures['disk_read_bytes'][i])
+        disk_read_bytes_std = np.std(measures['disk_read_bytes'][i])
+        memory_usage_mean = np.mean(measures['memory_usage'][i])
+        memory_usage_std = np.std(measures['memory_usage'][i])
         memory_max_values_mean = np.mean(measures['memory_max_values'][i])
         memory_max_values_std = np.std(measures['memory_max_values'][i])
         memory_max_per_process_values_mean = np.mean(measures['memory_max_per_process_values'][i])
@@ -78,7 +86,17 @@ def generate_measures_csv(labels, measures):
         execution_time_std = np.std(measures['execution_time'][i])
         
         # numbers rounded to 2 decimal places in format
-        csv_content += "%s,%.2f ±%.2f,%.2f ±%.2f,%.2f ±%.2f,%.2f ±%.2f\n" % (label, cpu_total_times_mean, cpu_total_times_std, memory_max_values_mean, memory_max_values_std, memory_max_per_process_values_mean, memory_max_per_process_values_std, execution_time_mean, execution_time_std)
+        csv_content += "%s,%.2f ±%.2f,%.2f ±%.2f,%.2f ±%.2f,%.2f ±%.2f,%.2f ±%.2f,%.2f ±%.2f,%.2f ±%.2f,%.2f ±%.2f\n" % (
+            label,
+            cpu_total_times_mean, cpu_total_times_std,
+            memory_max_values_mean, memory_max_values_std,
+            memory_max_per_process_values_mean, memory_max_per_process_values_std,
+            execution_time_mean, execution_time_std,
+            cpu_percentages_mean, cpu_percentages_std,
+            disk_write_bytes_mean, disk_write_bytes_std,
+            disk_read_bytes_mean, disk_read_bytes_std,
+            memory_usage_mean, memory_usage_std
+        )
 
     csv_file.write(csv_content)
 
@@ -112,6 +130,8 @@ def run():
         times = [[y['process']['execution_time'] for y in x] for x in results]
         cpu_total_times = [[y['cpu']['total_time'] for y in x] for x in results]
         cpu_percentages = [[y['cpu_percentage_mean'] for y in x] for x in results]
+        disk_read_bytes = [[y['disk']['read_bytes'] for y in x] for x in results]
+        disk_write_bytes = [[y['disk']['write_bytes'] for y in x] for x in results]
         memory_usage = [[y['memory_usage_mean'] for y in x] for x in results]
         memory_max_values = [[y['memory']['max'] for y in x] for x in results]
         memory_max_per_process_values = [[y['memory']['max_perprocess'] for y in x] for x in results]
@@ -120,6 +140,8 @@ def run():
         measures = {
             'cpu_total_times': cpu_total_times,
             'cpu_percentages': cpu_percentages,
+            'disk_read_bytes': disk_read_bytes,
+            'disk_write_bytes': disk_write_bytes,
             'memory_usage': memory_usage,
             'memory_max_values': memory_max_values,
             'memory_max_per_process_values': memory_max_per_process_values,
@@ -128,6 +150,8 @@ def run():
         measure_titles = {
             'cpu_total_times': 'Tempo total de CPU (ms)',
             'cpu_percentages': 'Porcentagem de CPU média (%)',
+            'disk_read_bytes': 'Bytes lidos no disco',
+            'disk_write_bytes': 'Bytes escritos no disco',
             'memory_usage': 'Uso médio de memória (bytes)',
             'memory_max_values': 'Máximo de memória (bytes)',
             'memory_max_per_process_values': 'Máximo de memória por processo (bytes)',
