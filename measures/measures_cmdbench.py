@@ -91,6 +91,9 @@ def run():
         for case in data:
             name = case['name']
             results = case['results']
+            for result in results:
+                result['cpu_percentage_mean'] = np.mean(result['time_series']['cpu_percentages'])
+                result['memory_usage_mean'] = np.mean(result['time_series']['memory_bytes'])
             first_result = case['results'][2]
 
             # plot time_stamp of first result
@@ -108,18 +111,24 @@ def run():
         results = [x['results'] for x in data]
         times = [[y['process']['execution_time'] for y in x] for x in results]
         cpu_total_times = [[y['cpu']['total_time'] for y in x] for x in results]
+        cpu_percentages = [[y['cpu_percentage_mean'] for y in x] for x in results]
+        memory_usage = [[y['memory_usage_mean'] for y in x] for x in results]
         memory_max_values = [[y['memory']['max'] for y in x] for x in results]
         memory_max_per_process_values = [[y['memory']['max_perprocess'] for y in x] for x in results]
 
         # measures = ['cpu_total_times', 'memory_max_values', 'memory_max_per_process_values', 'execution_time']
         measures = {
             'cpu_total_times': cpu_total_times,
+            'cpu_percentages': cpu_percentages,
+            'memory_usage': memory_usage,
             'memory_max_values': memory_max_values,
             'memory_max_per_process_values': memory_max_per_process_values,
             'execution_time': times
         }
         measure_titles = {
             'cpu_total_times': 'Tempo total de CPU (ms)',
+            'cpu_percentages': 'Porcentagem de CPU média (%)',
+            'memory_usage': 'Uso médio de memória (bytes)',
             'memory_max_values': 'Máximo de memória (bytes)',
             'memory_max_per_process_values': 'Máximo de memória por processo (bytes)',
             'execution_time': 'Tempo de execução (ms)'
